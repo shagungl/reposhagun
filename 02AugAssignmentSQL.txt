@@ -1,0 +1,861 @@
+02/08/22
+
+
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.30 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create databse buddy;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'databse buddy' at line 1
+mysql> use buddy;
+Database changed
+
+1.
+
+mysql> select * from emp3;
++--------+----------+-----------+------------+------------+--------+------------+--------+
+| emp_id | emp_name | job_name  | manager_id | hire_date  | salary | commission | dep_id |
++--------+----------+-----------+------------+------------+--------+------------+--------+
+|  68319 | KAYLING  | PRESIDENT |       NULL | 1991-11-18 |   6000 |       NULL |   1001 |
+|  66928 | BLAZE    | MANAGER   |      68319 | 1991-05-01 |   2750 |       NULL |   3001 |
+|  67832 | CLARE    | MANAGER   |      68319 | 1991-06-09 |   2550 |       NULL |   1001 |
+|  65646 | JONAS    | MANAGER   |      68319 | 1991-04-02 |   2957 |       NULL |   2001 |
+|  67858 | SACRLET  | ANALYST   |      68319 | 1997-04-19 |   3100 |       NULL |   2001 |
+|  67858 | SACRLET  | ANALYST   |      65646 | 1997-04-19 |   3100 |       NULL |   2001 |
+|  69062 | FRANK    | ANALYST   |      65646 | 1991-12-03 |   3100 |       NULL |   2001 |
+|  63679 | SANDRINE | CLERK     |      69062 | 1990-12-18 |    900 |       NULL |   2001 |
+|  64989 | ADELINE  | SALESMAN  |      66928 | 1991-02-20 |   1700 |        400 |   3001 |
+|  65271 | WADE     | SALESMAN  |      66928 | 1991-02-22 |   1350 |        600 |   3001 |
++--------+----------+-----------+------------+------------+--------+------------+--------+
+10 rows in set (0.01 sec)
+
+
+2.
+mysql> select salary from emp3;
++--------+
+| salary |
++--------+
+|   6000 |
+|   2750 |
+|   2550 |
+|   2957 |
+|   3100 |
+|   3100 |
+|   3100 |
+|    900 |
+|   1700 |
+|   1350 |
++--------+
+10 rows in set (0.00 sec)
+
+
+3.
+mysql> select distinct job_name
+    -> FROM emp3;
++-----------+
+| job_name  |
++-----------+
+| PRESIDENT |
+| MANAGER   |
+| ANALYST   |
+| CLERK     |
+| SALESMAN  |
++-----------+
+5 rows in set (0.00 sec)
+
+4.
+mysql> SELECT emp_name,
+    -> concat(1.15*salary) AS "Salary" FROM emp3;
++----------+--------------------+
+| emp_name | Salary             |
++----------+--------------------+
+| KAYLING  | 6899.999999999999  |
+| BLAZE    | 3162.4999999999995 |
+| CLARE    | 2932.5             |
+| JONAS    | 3400.5499999999997 |
+| SACRLET  | 3564.9999999999995 |
+| SACRLET  | 3564.9999999999995 |
+| FRANK    | 3564.9999999999995 |
+| SANDRINE | 1035               |
+| ADELINE  | 1954.9999999999998 |
+| WADE     | 1552.4999999999998 |
++----------+--------------------+
+10 rows in set (0.00 sec)
+
+
+5.
+mysql> SELECT concat(emp_name,'(',job_name,')') AS "Employee & Job"
+    -> FROM emp3;
++--------------------+
+| Employee & Job     |
++--------------------+
+| KAYLING(PRESIDENT) |
+| BLAZE(MANAGER)     |
+| CLARE(MANAGER)     |
+| JONAS(MANAGER)     |
+| SACRLET(ANALYST)   |
+| SACRLET(ANALYST)   |
+| FRANK(ANALYST)     |
+| SANDRINE(CLERK)    |
+| ADELINE(SALESMAN)  |
+| WADE(SALESMAN)     |
++--------------------+
+10 rows in set (0.00 sec)
+
+
+6.
+mysql> SELECT emp_name,
+    -> concat('$',1.15*salary)AS salary
+    -> FROM emp3;
++----------+---------------------+
+| emp_name | salary              |
++----------+---------------------+
+| KAYLING  | $6899.999999999999  |
+| BLAZE    | $3162.4999999999995 |
+| CLARE    | $2932.5             |
+| JONAS    | $3400.5499999999997 |
+| SACRLET  | $3564.9999999999995 |
+| SACRLET  | $3564.9999999999995 |
+| FRANK    | $3564.9999999999995 |
+| SANDRINE | $1035               |
+| ADELINE  | $1954.9999999999998 |
+| WADE     | $1552.4999999999998 |
++----------+---------------------+
+10 rows in set (0.00 sec)
+
+
+8.
+mysql> SELECT length(emp_name)
+    -> FROM emp3;
++------------------+
+| length(emp_name) |
++------------------+
+|                7 |
+|                5 |
+|                5 |
+|                5 |
+|                7 |
+|                7 |
+|                5 |
+|                8 |
+|                7 |
+|                4 |
++------------------+
+10 rows in set (0.00 sec)
+
+9.
+mysql> SELECT emp_id, salary, commission
+    -> FROM emp3;
++--------+--------+------------+
+| emp_id | salary | commission |
++--------+--------+------------+
+|  68319 |   6000 |       NULL |
+|  66928 |   2750 |       NULL |
+|  67832 |   2550 |       NULL |
+|  65646 |   2957 |       NULL |
+|  67858 |   3100 |       NULL |
+|  67858 |   3100 |       NULL |
+|  69062 |   3100 |       NULL |
+|  63679 |    900 |       NULL |
+|  64989 |   1700 |        400 |
+|  65271 |   1350 |        600 |
++--------+--------+------------+
+10 rows in set (0.00 sec)
+
+
+10.
+mysql> SELECT DISTINCT dep_id, job_name
+    -> FROM emp3;
++--------+-----------+
+| dep_id | job_name  |
++--------+-----------+
+|   1001 | PRESIDENT |
+|   3001 | MANAGER   |
+|   1001 | MANAGER   |
+|   2001 | MANAGER   |
+|   2001 | ANALYST   |
+|   2001 | CLERK     |
+|   3001 | SALESMAN  |
++--------+-----------+
+7 rows in set (0.00 sec)
+
+
+11.
+mysql> SELECT *
+    -> FROM emp3
+    -> WHERE dep_id!=2001;
++--------+----------+-----------+------------+------------+--------+------------+--------+
+| emp_id | emp_name | job_name  | manager_id | hire_date  | salary | commission | dep_id |
++--------+----------+-----------+------------+------------+--------+------------+--------+
+|  68319 | KAYLING  | PRESIDENT |       NULL | 1991-11-18 |   6000 |       NULL |   1001 |
+|  66928 | BLAZE    | MANAGER   |      68319 | 1991-05-01 |   2750 |       NULL |   3001 |
+|  67832 | CLARE    | MANAGER   |      68319 | 1991-06-09 |   2550 |       NULL |   1001 |
+|  64989 | ADELINE  | SALESMAN  |      66928 | 1991-02-20 |   1700 |        400 |   3001 |
+|  65271 | WADE     | SALESMAN  |      66928 | 1991-02-22 |   1350 |        600 |   3001 |
++--------+----------+-----------+------------+------------+--------+------------+--------+
+5 rows in set (0.00 sec)
+
+
+12.
+mysql> SELECT *
+    -> FROM emp3
+    -> WHERE hire_date<'1991-01-01';
++--------+----------+----------+------------+------------+--------+------------+--------+
+| emp_id | emp_name | job_name | manager_id | hire_date  | salary | commission | dep_id |
++--------+----------+----------+------------+------------+--------+------------+--------+
+|  63679 | SANDRINE | CLERK    |      69062 | 1990-12-18 |    900 |       NULL |   2001 |
++--------+----------+----------+------------+------------+--------+------------+--------+
+1 row in set (0.00 sec)
+
+
+13.
+mysql> SELECT AVG(salary)AS 'Average Salary'
+    -> FROM emp3
+    -> WHERE job_name='ANALYST';
++----------------+
+| Average Salary |
++----------------+
+|           3100 |
++----------------+
+1 row in set (0.00 sec)
+
+
+14.
+mysql> SELECT *
+    -> FROM emp3
+    -> WHERE emp_name='BLAZE';
++--------+----------+----------+------------+------------+--------+------------+--------+
+| emp_id | emp_name | job_name | manager_id | hire_date  | salary | commission | dep_id |
++--------+----------+----------+------------+------------+--------+------------+--------+
+|  66928 | BLAZE    | MANAGER  |      68319 | 1991-05-01 |   2750 |       NULL |   3001 |
++--------+----------+----------+------------+------------+--------+------------+--------+
+1 row in set (0.00 sec)
+
+
+15.
+mysql> SELECT *
+    -> FROM emp3
+    -> WHERE commission>salary;
+Empty set (0.00 sec)
+
+
+
+mysql> INSERT INTO emp3
+    -> (emp_id,emp_name,job_name,manager_id,hire_date,salary,commission,dep_id)
+    -> VALUES(66564,'MADDEN','SALESMAN',66928,'1991-09-28',1350.00,1500.00,3001);
+Query OK, 1 row affected (0.00 sec)
+
+
+
+mysql> SELECT *
+    -> FROM emp3
+    -> WHERE commission>salary;
++--------+----------+----------+------------+------------+--------+------------+--------+
+| emp_id | emp_name | job_name | manager_id | hire_date  | salary | commission | dep_id |
++--------+----------+----------+------------+------------+--------+------------+--------+
+|  66564 | MADDEN   | SALESMAN |      66928 | 1991-09-28 |   1350 |       1500 |   3001 |
++--------+----------+----------+------------+------------+--------+------------+--------+
+1 row in set (0.00 sec)
+
+
+16.
+mysql> SELECT *
+    -> FROM emp3
+    -> WHERE (1.25*salary)>3000
+    -> ;
++--------+----------+-----------+------------+------------+--------+------------+--------+
+| emp_id | emp_name | job_name  | manager_id | hire_date  | salary | commission | dep_id |
++--------+----------+-----------+------------+------------+--------+------------+--------+
+|  68319 | KAYLING  | PRESIDENT |       NULL | 1991-11-18 |   6000 |       NULL |   1001 |
+|  66928 | BLAZE    | MANAGER   |      68319 | 1991-05-01 |   2750 |       NULL |   3001 |
+|  67832 | CLARE    | MANAGER   |      68319 | 1991-06-09 |   2550 |       NULL |   1001 |
+|  65646 | JONAS    | MANAGER   |      68319 | 1991-04-02 |   2957 |       NULL |   2001 |
+|  67858 | SACRLET  | ANALYST   |      68319 | 1997-04-19 |   3100 |       NULL |   2001 |
+|  67858 | SACRLET  | ANALYST   |      65646 | 1997-04-19 |   3100 |       NULL |   2001 |
+|  69062 | FRANK    | ANALYST   |      65646 | 1991-12-03 |   3100 |       NULL |   2001 |
++--------+----------+-----------+------------+------------+--------+------------+--------+
+7 rows in set (0.00 sec)
+
+
+17.
+mysql> SELECT emp_name
+    -> FROM emp3
+    -> WHERE length(emp_name)=6;
++----------+
+| emp_name |
++----------+
+| MADDEN   |
++----------+
+1 row in set (0.00 sec)
+
+
+18.
+mysql>  select emp_id, emp_name,date_format(hire_date,'%M,%d,%Y') "Hire Date"
+    -> FROM emp3;
++--------+----------+-------------------+
+| emp_id | emp_name | Hire Date         |
++--------+----------+-------------------+
+|  68319 | KAYLING  | November,18,1991  |
+|  66928 | BLAZE    | May,01,1991       |
+|  67832 | CLARE    | June,09,1991      |
+|  65646 | JONAS    | April,02,1991     |
+|  67858 | SACRLET  | April,19,1997     |
+|  67858 | SACRLET  | April,19,1997     |
+|  69062 | FRANK    | December,03,1991  |
+|  63679 | SANDRINE | December,18,1990  |
+|  64989 | ADELINE  | February,20,1991  |
+|  65271 | WADE     | February,22,1991  |
+|  66564 | MADDEN   | September,28,1991 |
++--------+----------+-------------------+
+11 rows in set (0.00 sec)
+
+
+
+mysql> select emp_id,emp_name,hire_date
+    -> from emp3
+    -> where date_format(hire_date, '%M')='January';
+Empty set (0.00 sec)
+
+
+19.
+mysql> select concat(emp_name," works for ",Manager_id) "Employees relation"
+    -> FROM emp3;
++--------------------------+
+| Employees relation       |
++--------------------------+
+| NULL                     |
+| BLAZE works for 68319    |
+| CLARE works for 68319    |
+| JONAS works for 68319    |
+| SACRLET works for 68319  |
+| SACRLET works for 65646  |
+| FRANK works for 65646    |
+| SANDRINE works for 69062 |
+| ADELINE works for 66928  |
+| WADE works for 66928     |
+| MADDEN works for 66928   |
++--------------------------+
+11 rows in set (0.00 sec)
+
+
+20.
+mysql> SELECT *
+    -> FROM emp3
+    -> WHERE job_name='CLERK';
++--------+----------+----------+------------+------------+--------+------------+--------+
+| emp_id | emp_name | job_name | manager_id | hire_date  | salary | commission | dep_id |
++--------+----------+----------+------------+------------+--------+------------+--------+
+|  63679 | SANDRINE | CLERK    |      69062 | 1990-12-18 |    900 |       NULL |   2001 |
++--------+----------+----------+------------+------------+--------+------------+--------+
+1 row in set (0.00 sec)
+
+
+21.
+
+mysql> select *
+    -> FROM emp3
+    -> WHERE floor(Datediff(curdate(),hire_date)/365)>27;
++--------+----------+-----------+------------+------------+--------+------------+--------+
+| emp_id | emp_name | job_name  | manager_id | hire_date  | salary | commission | dep_id |
++--------+----------+-----------+------------+------------+--------+------------+--------+
+|  68319 | KAYLING  | PRESIDENT |       NULL | 1991-11-18 |   6000 |       NULL |   1001 |
+|  66928 | BLAZE    | MANAGER   |      68319 | 1991-05-01 |   2750 |       NULL |   3001 |
+|  67832 | CLARE    | MANAGER   |      68319 | 1991-06-09 |   2550 |       NULL |   1001 |
+|  65646 | JONAS    | MANAGER   |      68319 | 1991-04-02 |   2957 |       NULL |   2001 |
+|  69062 | FRANK    | ANALYST   |      65646 | 1991-12-03 |   3100 |       NULL |   2001 |
+|  63679 | SANDRINE | CLERK     |      69062 | 1990-12-18 |    900 |       NULL |   2001 |
+|  64989 | ADELINE  | SALESMAN  |      66928 | 1991-02-20 |   1700 |        400 |   3001 |
+|  65271 | WADE     | SALESMAN  |      66928 | 1991-02-22 |   1350 |        600 |   3001 |
+|  66564 | MADDEN   | SALESMAN  |      66928 | 1991-09-28 |   1350 |       1500 |   3001 |
++--------+----------+-----------+------------+------------+--------+------------+--------+
+9 rows in set (0.00 sec)
+
+22.
+mysql> SELECT *
+    -> FROM emp3
+    -> WHERE salary<3500.00;
++--------+----------+----------+------------+------------+--------+------------+--------+
+| emp_id | emp_name | job_name | manager_id | hire_date  | salary | commission | dep_id |
++--------+----------+----------+------------+------------+--------+------------+--------+
+|  66928 | BLAZE    | MANAGER  |      68319 | 1991-05-01 |   2750 |       NULL |   3001 |
+|  67832 | CLARE    | MANAGER  |      68319 | 1991-06-09 |   2550 |       NULL |   1001 |
+|  65646 | JONAS    | MANAGER  |      68319 | 1991-04-02 |   2957 |       NULL |   2001 |
+|  67858 | SACRLET  | ANALYST  |      68319 | 1997-04-19 |   3100 |       NULL |   2001 |
+|  67858 | SACRLET  | ANALYST  |      65646 | 1997-04-19 |   3100 |       NULL |   2001 |
+|  69062 | FRANK    | ANALYST  |      65646 | 1991-12-03 |   3100 |       NULL |   2001 |
+|  63679 | SANDRINE | CLERK    |      69062 | 1990-12-18 |    900 |       NULL |   2001 |
+|  64989 | ADELINE  | SALESMAN |      66928 | 1991-02-20 |   1700 |        400 |   3001 |
+|  65271 | WADE     | SALESMAN |      66928 | 1991-02-22 |   1350 |        600 |   3001 |
+|  66564 | MADDEN   | SALESMAN |      66928 | 1991-09-28 |   1350 |       1500 |   3001 |
++--------+----------+----------+------------+------------+--------+------------+--------+
+10 rows in set (0.00 sec)
+
+
+23.
+mysql> SELECT emp_name, job_name, salary
+    -> FROM emp3
+    -> WHERE job_name= 'ANALYST';
++----------+----------+--------+
+| emp_name | job_name | salary |
++----------+----------+--------+
+| SACRLET  | ANALYST  |   3100 |
+| SACRLET  | ANALYST  |   3100 |
+| FRANK    | ANALYST  |   3100 |
++----------+----------+--------+
+3 rows in set (0.00 sec)
+
+
+
+24.
+mysql> SELECT *
+    -> FROM emp3
+    -> WHERE hire_date like '1991-%';
++--------+----------+-----------+------------+------------+--------+------------+--------+
+| emp_id | emp_name | job_name  | manager_id | hire_date  | salary | commission | dep_id |
++--------+----------+-----------+------------+------------+--------+------------+--------+
+|  68319 | KAYLING  | PRESIDENT |       NULL | 1991-11-18 |   6000 |       NULL |   1001 |
+|  66928 | BLAZE    | MANAGER   |      68319 | 1991-05-01 |   2750 |       NULL |   3001 |
+|  67832 | CLARE    | MANAGER   |      68319 | 1991-06-09 |   2550 |       NULL |   1001 |
+|  65646 | JONAS    | MANAGER   |      68319 | 1991-04-02 |   2957 |       NULL |   2001 |
+|  69062 | FRANK    | ANALYST   |      65646 | 1991-12-03 |   3100 |       NULL |   2001 |
+|  64989 | ADELINE  | SALESMAN  |      66928 | 1991-02-20 |   1700 |        400 |   3001 |
+|  65271 | WADE     | SALESMAN  |      66928 | 1991-02-22 |   1350 |        600 |   3001 |
+|  66564 | MADDEN   | SALESMAN  |      66928 | 1991-09-28 |   1350 |       1500 |   3001 |
++--------+----------+-----------+------------+------------+--------+------------+--------+
+8 rows in set (0.00 sec)
+
+
+25.
+mysql> SELECT emp_id, emp_name, hire_date, salary
+    -> FROM emp3
+    -> WHERE hire_date< '1991-04-01';
++--------+----------+------------+--------+
+| emp_id | emp_name | hire_date  | salary |
++--------+----------+------------+--------+
+|  63679 | SANDRINE | 1990-12-18 |    900 |
+|  64989 | ADELINE  | 1991-02-20 |   1700 |
+|  65271 | WADE     | 1991-02-22 |   1350 |
++--------+----------+------------+--------+
+3 rows in set (0.00 sec)
+
+
+26.
+mysql> SELECT emp_name, job_name
+    -> FROM emp3
+    -> WHERE manager_id='NULL';
+Empty set, 1 warning (0.00 sec)
+
+
+27.
+mysql> SELECT *
+    -> FROM emp3
+    -> WHERE hire_date=' 1991-05-01';
++--------+----------+----------+------------+------------+--------+------------+--------+
+| emp_id | emp_name | job_name | manager_id | hire_date  | salary | commission | dep_id |
++--------+----------+----------+------------+------------+--------+------------+--------+
+|  66928 | BLAZE    | MANAGER  |      68319 | 1991-05-01 |   2750 |       NULL |   3001 |
++--------+----------+----------+------------+------------+--------+------------+--------+
+1 row in set, 1 warning (0.00 sec)
+
+
+28.
+mysql> select emp_id,emp_name,salary,floor(datediff(curdate(),hire_date)/365) "Experience(Years)"
+    -> FROM emp3
+    -> WHERE manager_id=68319;
++--------+----------+--------+-------------------+
+| emp_id | emp_name | salary | Experience(Years) |
++--------+----------+--------+-------------------+
+|  66928 | BLAZE    |   2750 |                31 |
+|  67832 | CLARE    |   2550 |                31 |
+|  65646 | JONAS    |   2957 |                31 |
+|  67858 | SACRLET  |   3100 |                25 |
++--------+----------+--------+-------------------+
+4 rows in set (0.00 sec)
+
+
+29.
+mysql> SELECT emp_id,emp_name,salary,floor(datediff(curdate(),hire_date)/365) "Experience(Years)"
+    -> FROM emp3
+    -> WHERE salary/30>100.00;
++--------+----------+--------+-------------------+
+| emp_id | emp_name | salary | Experience(Years) |
++--------+----------+--------+-------------------+
+|  68319 | KAYLING  |   6000 |                30 |
+|  67858 | SACRLET  |   3100 |                25 |
+|  67858 | SACRLET  |   3100 |                25 |
+|  69062 | FRANK    |   3100 |                30 |
++--------+----------+--------+-------------------+
+4 rows in set (0.00 sec)
+
+
+30.
+mysql> select emp_id,emp_name,floor(datediff('1999-12-31',hire_date)/365) "Service"
+    -> FROM emp3
+    -> WHERE  floor(datediff('1999-12-31',hire_date)/365)=8;
++--------+----------+---------+
+| emp_id | emp_name | Service |
++--------+----------+---------+
+|  68319 | KAYLING  |       8 |
+|  66928 | BLAZE    |       8 |
+|  67832 | CLARE    |       8 |
+|  65646 | JONAS    |       8 |
+|  69062 | FRANK    |       8 |
+|  64989 | ADELINE  |       8 |
+|  65271 | WADE     |       8 |
+|  66564 | MADDEN   |       8 |
++--------+----------+---------+
+8 rows in set (0.00 sec)
+
+
+31.
+mysql> SELECT *
+    -> FROM emp3
+    -> WHERE salary%2!=0;
++--------+----------+----------+------------+------------+--------+------------+--------+
+| emp_id | emp_name | job_name | manager_id | hire_date  | salary | commission | dep_id |
++--------+----------+----------+------------+------------+--------+------------+--------+
+|  65646 | JONAS    | MANAGER  |      68319 | 1991-04-02 |   2957 |       NULL |   2001 |
++--------+----------+----------+------------+------------+--------+------------+--------+
+1 row in set (0.00 sec)
+
+
+32.
+mysql> SELECT *
+    -> FROM emp3
+    -> WHERE salary<1000;
++--------+----------+----------+------------+------------+--------+------------+--------+
+| emp_id | emp_name | job_name | manager_id | hire_date  | salary | commission | dep_id |
++--------+----------+----------+------------+------------+--------+------------+--------+
+|  63679 | SANDRINE | CLERK    |      69062 | 1990-12-18 |    900 |       NULL |   2001 |
++--------+----------+----------+------------+------------+--------+------------+--------+
+1 row in set (0.00 sec)
+
+
+33.
+mysql> SELECT *
+    -> FROM emp3
+    -> WHERE hire_date like '%-04-%';
++--------+----------+----------+------------+------------+--------+------------+--------+
+| emp_id | emp_name | job_name | manager_id | hire_date  | salary | commission | dep_id |
++--------+----------+----------+------------+------------+--------+------------+--------+
+|  65646 | JONAS    | MANAGER  |      68319 | 1991-04-02 |   2957 |       NULL |   2001 |
+|  67858 | SACRLET  | ANALYST  |      68319 | 1997-04-19 |   3100 |       NULL |   2001 |
+|  67858 | SACRLET  | ANALYST  |      65646 | 1997-04-19 |   3100 |       NULL |   2001 |
++--------+----------+----------+------------+------------+--------+------------+--------+
+3 rows in set (0.00 sec)
+
+
+34.
+mysql> SELECT *
+    -> FROM emp3
+    -> WHERE date_format(hire_date,'%d')<='19';
++--------+----------+-----------+------------+------------+--------+------------+--------+
+| emp_id | emp_name | job_name  | manager_id | hire_date  | salary | commission | dep_id |
++--------+----------+-----------+------------+------------+--------+------------+--------+
+|  68319 | KAYLING  | PRESIDENT |       NULL | 1991-11-18 |   6000 |       NULL |   1001 |
+|  66928 | BLAZE    | MANAGER   |      68319 | 1991-05-01 |   2750 |       NULL |   3001 |
+|  67832 | CLARE    | MANAGER   |      68319 | 1991-06-09 |   2550 |       NULL |   1001 |
+|  65646 | JONAS    | MANAGER   |      68319 | 1991-04-02 |   2957 |       NULL |   2001 |
+|  67858 | SACRLET  | ANALYST   |      68319 | 1997-04-19 |   3100 |       NULL |   2001 |
+|  67858 | SACRLET  | ANALYST   |      65646 | 1997-04-19 |   3100 |       NULL |   2001 |
+|  69062 | FRANK    | ANALYST   |      65646 | 1991-12-03 |   3100 |       NULL |   2001 |
+|  63679 | SANDRINE | CLERK     |      69062 | 1990-12-18 |    900 |       NULL |   2001 |
++--------+----------+-----------+------------+------------+--------+------------+--------+
+8 rows in set (0.00 sec)
+
+
+
+mysql> SELECT *
+    -> FROM emp3
+    -> WHERE date_format(hire_date,'%d')<'19';
++--------+----------+-----------+------------+------------+--------+------------+--------+
+| emp_id | emp_name | job_name  | manager_id | hire_date  | salary | commission | dep_id |
++--------+----------+-----------+------------+------------+--------+------------+--------+
+|  68319 | KAYLING  | PRESIDENT |       NULL | 1991-11-18 |   6000 |       NULL |   1001 |
+|  66928 | BLAZE    | MANAGER   |      68319 | 1991-05-01 |   2750 |       NULL |   3001 |
+|  67832 | CLARE    | MANAGER   |      68319 | 1991-06-09 |   2550 |       NULL |   1001 |
+|  65646 | JONAS    | MANAGER   |      68319 | 1991-04-02 |   2957 |       NULL |   2001 |
+|  69062 | FRANK    | ANALYST   |      65646 | 1991-12-03 |   3100 |       NULL |   2001 |
+|  63679 | SANDRINE | CLERK     |      69062 | 1990-12-18 |    900 |       NULL |   2001 |
++--------+----------+-----------+------------+------------+--------+------------+--------+
+6 rows in set (0.00 sec)
+
+
+35.
+mysql> select emp_id,emp_name,job_name,floor(datediff(curdate(),hire_date)/365) "Experience(Years)"
+    -> FROM emp3
+    ->  where floor(datediff(curdate(),hire_date)/365)>10 & job_name='SALESMAN';
+Empty set, 12 warnings (0.00 sec)
+
+
+36.
+mysql> SELECT *
+    -> FROM emp3
+    -> WHERE (dep_id=3001 || dep_id=1001)& hire_date like '1991-%';
+Empty set, 1 warning (0.00 sec)
+
+
+37.
+mysql> SELECT *
+    -> FROM emp3
+    -> WHERE dep_id=1001 OR dep_id=2001;
++--------+----------+-----------+------------+------------+--------+------------+--------+
+| emp_id | emp_name | job_name  | manager_id | hire_date  | salary | commission | dep_id |
++--------+----------+-----------+------------+------------+--------+------------+--------+
+|  68319 | KAYLING  | PRESIDENT |       NULL | 1991-11-18 |   6000 |       NULL |   1001 |
+|  67832 | CLARE    | MANAGER   |      68319 | 1991-06-09 |   2550 |       NULL |   1001 |
+|  65646 | JONAS    | MANAGER   |      68319 | 1991-04-02 |   2957 |       NULL |   2001 |
+|  67858 | SACRLET  | ANALYST   |      68319 | 1997-04-19 |   3100 |       NULL |   2001 |
+|  67858 | SACRLET  | ANALYST   |      65646 | 1997-04-19 |   3100 |       NULL |   2001 |
+|  69062 | FRANK    | ANALYST   |      65646 | 1991-12-03 |   3100 |       NULL |   2001 |
+|  63679 | SANDRINE | CLERK     |      69062 | 1990-12-18 |    900 |       NULL |   2001 |
++--------+----------+-----------+------------+------------+--------+------------+--------+
+7 rows in set (0.00 sec)
+
+38.
+mysql> SELECT *
+    -> FROM emp3
+    -> WHERE job_name='CLERK' AND dep_id=2001;
++--------+----------+----------+------------+------------+--------+------------+--------+
+| emp_id | emp_name | job_name | manager_id | hire_date  | salary | commission | dep_id |
++--------+----------+----------+------------+------------+--------+------------+--------+
+|  63679 | SANDRINE | CLERK    |      69062 | 1990-12-18 |    900 |       NULL |   2001 |
++--------+----------+----------+------------+------------+--------+------------+--------+
+1 row in set (0.00 sec)
+
+
+
+39.
+mysql> SELECT emp_id,emp_name,salary,salary*12 AS "Annual Salary",commission,job_name,dep_id
+    -> FROM emp3
+    -> where salary*12<34000 and commission<salary AND job_name ='SALESMAN' AND dep_id =3001;
++--------+----------+--------+---------------+------------+----------+--------+
+| emp_id | emp_name | salary | Annual Salary | commission | job_name | dep_id |
++--------+----------+--------+---------------+------------+----------+--------+
+|  64989 | ADELINE  |   1700 |         20400 |        400 | SALESMAN |   3001 |
+|  65271 | WADE     |   1350 |         16200 |        600 | SALESMAN |   3001 |
++--------+----------+--------+---------------+------------+----------+--------+
+2 rows in set (0.00 sec)
+
+
+40.
+mysql> SELECT *
+    -> FROM emp3
+    -> WHERE job_name='CLERK' OR job_name='MANAGER';
++--------+----------+----------+------------+------------+--------+------------+--------+
+| emp_id | emp_name | job_name | manager_id | hire_date  | salary | commission | dep_id |
++--------+----------+----------+------------+------------+--------+------------+--------+
+|  66928 | BLAZE    | MANAGER  |      68319 | 1991-05-01 |   2750 |       NULL |   3001 |
+|  67832 | CLARE    | MANAGER  |      68319 | 1991-06-09 |   2550 |       NULL |   1001 |
+|  65646 | JONAS    | MANAGER  |      68319 | 1991-04-02 |   2957 |       NULL |   2001 |
+|  63679 | SANDRINE | CLERK    |      69062 | 1990-12-18 |    900 |       NULL |   2001 |
++--------+----------+----------+------------+------------+--------+------------+--------+
+4 rows in set (0.00 sec)
+
+
+41.
+mysql> SELECT *
+    -> FROM emp3
+    -> WHERE hire_date not like'%-02-%';
++--------+----------+-----------+------------+------------+--------+------------+--------+
+| emp_id | emp_name | job_name  | manager_id | hire_date  | salary | commission | dep_id |
++--------+----------+-----------+------------+------------+--------+------------+--------+
+|  68319 | KAYLING  | PRESIDENT |       NULL | 1991-11-18 |   6000 |       NULL |   1001 |
+|  66928 | BLAZE    | MANAGER   |      68319 | 1991-05-01 |   2750 |       NULL |   3001 |
+|  67832 | CLARE    | MANAGER   |      68319 | 1991-06-09 |   2550 |       NULL |   1001 |
+|  65646 | JONAS    | MANAGER   |      68319 | 1991-04-02 |   2957 |       NULL |   2001 |
+|  67858 | SACRLET  | ANALYST   |      68319 | 1997-04-19 |   3100 |       NULL |   2001 |
+|  67858 | SACRLET  | ANALYST   |      65646 | 1997-04-19 |   3100 |       NULL |   2001 |
+|  69062 | FRANK    | ANALYST   |      65646 | 1991-12-03 |   3100 |       NULL |   2001 |
+|  63679 | SANDRINE | CLERK     |      69062 | 1990-12-18 |    900 |       NULL |   2001 |
+|  66564 | MADDEN   | SALESMAN  |      66928 | 1991-09-28 |   1350 |       1500 |   3001 |
++--------+----------+-----------+------------+------------+--------+------------+--------+
+9 rows in set (0.00 sec)
+
+
+42.
+mysql> SELECT *
+    -> FROM emp3
+    -> WHERE hire_date like'1991-%';
++--------+----------+-----------+------------+------------+--------+------------+--------+
+| emp_id | emp_name | job_name  | manager_id | hire_date  | salary | commission | dep_id |
++--------+----------+-----------+------------+------------+--------+------------+--------+
+|  68319 | KAYLING  | PRESIDENT |       NULL | 1991-11-18 |   6000 |       NULL |   1001 |
+|  66928 | BLAZE    | MANAGER   |      68319 | 1991-05-01 |   2750 |       NULL |   3001 |
+|  67832 | CLARE    | MANAGER   |      68319 | 1991-06-09 |   2550 |       NULL |   1001 |
+|  65646 | JONAS    | MANAGER   |      68319 | 1991-04-02 |   2957 |       NULL |   2001 |
+|  69062 | FRANK    | ANALYST   |      65646 | 1991-12-03 |   3100 |       NULL |   2001 |
+|  64989 | ADELINE  | SALESMAN  |      66928 | 1991-02-20 |   1700 |        400 |   3001 |
+|  65271 | WADE     | SALESMAN  |      66928 | 1991-02-22 |   1350 |        600 |   3001 |
+|  66564 | MADDEN   | SALESMAN  |      66928 | 1991-09-28 |   1350 |       1500 |   3001 |
++--------+----------+-----------+------------+------------+--------+------------+--------+
+8 rows in set (0.00 sec)
+
+
+43.
+mysql> SELECT *
+    -> FROM emp3
+    -> WHERE hire_date like'%-06-%';
++--------+----------+----------+------------+------------+--------+------------+--------+
+| emp_id | emp_name | job_name | manager_id | hire_date  | salary | commission | dep_id |
++--------+----------+----------+------------+------------+--------+------------+--------+
+|  67832 | CLARE    | MANAGER  |      68319 | 1991-06-09 |   2550 |       NULL |   1001 |
++--------+----------+----------+------------+------------+--------+------------+--------+
+1 row in set (0.00 sec)
+
+
+44.
+mysql> SELECT *
+    -> FROM emp3
+    -> WHERE salary*12>24000 AND salary*12<=50000;
++--------+----------+----------+------------+------------+--------+------------+--------+
+| emp_id | emp_name | job_name | manager_id | hire_date  | salary | commission | dep_id |
++--------+----------+----------+------------+------------+--------+------------+--------+
+|  66928 | BLAZE    | MANAGER  |      68319 | 1991-05-01 |   2750 |       NULL |   3001 |
+|  67832 | CLARE    | MANAGER  |      68319 | 1991-06-09 |   2550 |       NULL |   1001 |
+|  65646 | JONAS    | MANAGER  |      68319 | 1991-04-02 |   2957 |       NULL |   2001 |
+|  67858 | SACRLET  | ANALYST  |      68319 | 1997-04-19 |   3100 |       NULL |   2001 |
+|  67858 | SACRLET  | ANALYST  |      65646 | 1997-04-19 |   3100 |       NULL |   2001 |
+|  69062 | FRANK    | ANALYST  |      65646 | 1991-12-03 |   3100 |       NULL |   2001 |
++--------+----------+----------+------------+------------+--------+------------+--------+
+6 rows in set (0.00 sec)
+
+
+
+
+45.
+mysql> SELECT *
+    -> FROM emp3
+    -> WHERE hire_date= '1991-05-01'OR hire_date='1991-02-20' OR hire_date='1991-12-03';
++--------+----------+----------+------------+------------+--------+------------+--------+
+| emp_id | emp_name | job_name | manager_id | hire_date  | salary | commission | dep_id |
++--------+----------+----------+------------+------------+--------+------------+--------+
+|  66928 | BLAZE    | MANAGER  |      68319 | 1991-05-01 |   2750 |       NULL |   3001 |
+|  69062 | FRANK    | ANALYST  |      65646 | 1991-12-03 |   3100 |       NULL |   2001 |
+|  64989 | ADELINE  | SALESMAN |      66928 | 1991-02-20 |   1700 |        400 |   3001 |
++--------+----------+----------+------------+------------+--------+------------+--------+
+3 rows in set (0.00 sec)
+
+
+46.
+mysql> SELECT *
+    -> FROM emp3
+    -> WHERE manager_id=63679 OR  manager_id=68319 OR  manager_id=66564 OR  manager_id=69000;
++--------+----------+----------+------------+------------+--------+------------+--------+
+| emp_id | emp_name | job_name | manager_id | hire_date  | salary | commission | dep_id |
++--------+----------+----------+------------+------------+--------+------------+--------+
+|  66928 | BLAZE    | MANAGER  |      68319 | 1991-05-01 |   2750 |       NULL |   3001 |
+|  67832 | CLARE    | MANAGER  |      68319 | 1991-06-09 |   2550 |       NULL |   1001 |
+|  65646 | JONAS    | MANAGER  |      68319 | 1991-04-02 |   2957 |       NULL |   2001 |
+|  67858 | SACRLET  | ANALYST  |      68319 | 1997-04-19 |   3100 |       NULL |   2001 |
++--------+----------+----------+------------+------------+--------+------------+--------+
+4 rows in set (0.00 sec)
+
+
+47.
+mysql> SELECT *
+    -> FROM emp3
+    -> WHERE hire_date<='1991-12-31' AND hire_date>='1991-07-01';
++--------+----------+-----------+------------+------------+--------+------------+--------+
+| emp_id | emp_name | job_name  | manager_id | hire_date  | salary | commission | dep_id |
++--------+----------+-----------+------------+------------+--------+------------+--------+
+|  68319 | KAYLING  | PRESIDENT |       NULL | 1991-11-18 |   6000 |       NULL |   1001 |
+|  69062 | FRANK    | ANALYST   |      65646 | 1991-12-03 |   3100 |       NULL |   2001 |
+|  66564 | MADDEN   | SALESMAN  |      66928 | 1991-09-28 |   1350 |       1500 |   3001 |
++--------+----------+-----------+------------+------------+--------+------------+--------+
+3 rows in set (0.00 sec)
+
+
+
+48.
+mysql> SELECT *
+    -> FROM emp3
+    ->  WHERE hire_date<='2000-01-01' AND hire_date>='1990-01-01';
++--------+----------+-----------+------------+------------+--------+------------+--------+
+| emp_id | emp_name | job_name  | manager_id | hire_date  | salary | commission | dep_id |
++--------+----------+-----------+------------+------------+--------+------------+--------+
+|  68319 | KAYLING  | PRESIDENT |       NULL | 1991-11-18 |   6000 |       NULL |   1001 |
+|  66928 | BLAZE    | MANAGER   |      68319 | 1991-05-01 |   2750 |       NULL |   3001 |
+|  67832 | CLARE    | MANAGER   |      68319 | 1991-06-09 |   2550 |       NULL |   1001 |
+|  65646 | JONAS    | MANAGER   |      68319 | 1991-04-02 |   2957 |       NULL |   2001 |
+|  67858 | SACRLET  | ANALYST   |      68319 | 1997-04-19 |   3100 |       NULL |   2001 |
+|  67858 | SACRLET  | ANALYST   |      65646 | 1997-04-19 |   3100 |       NULL |   2001 |
+|  69062 | FRANK    | ANALYST   |      65646 | 1991-12-03 |   3100 |       NULL |   2001 |
+|  63679 | SANDRINE | CLERK     |      69062 | 1990-12-18 |    900 |       NULL |   2001 |
+|  64989 | ADELINE  | SALESMAN  |      66928 | 1991-02-20 |   1700 |        400 |   3001 |
+|  65271 | WADE     | SALESMAN  |      66928 | 1991-02-22 |   1350 |        600 |   3001 |
+|  66564 | MADDEN   | SALESMAN  |      66928 | 1991-09-28 |   1350 |       1500 |   3001 |
++--------+----------+-----------+------------+------------+--------+------------+--------+
+11 rows in set (0.00 sec)
+
+
+49.
+mysql> SELECT *
+    -> FROM emp3
+    -> WHERE job_name='MANAGER' AND (dep_id=1001 OR dep_id= 2001);
++--------+----------+----------+------------+------------+--------+------------+--------+
+| emp_id | emp_name | job_name | manager_id | hire_date  | salary | commission | dep_id |
++--------+----------+----------+------------+------------+--------+------------+--------+
+|  67832 | CLARE    | MANAGER  |      68319 | 1991-06-09 |   2550 |       NULL |   1001 |
+|  65646 | JONAS    | MANAGER  |      68319 | 1991-04-02 |   2957 |       NULL |   2001 |
++--------+----------+----------+------------+------------+--------+------------+--------+
+2 rows in set (0.00 sec)
+
+
+50.
+mysql> SELECT *
+    -> FROM emp3
+    -> WHERE hire_date LIKE'%-02-%' AND salary BETWEEN 1001 AND 2000;
++--------+----------+----------+------------+------------+--------+------------+--------+
+| emp_id | emp_name | job_name | manager_id | hire_date  | salary | commission | dep_id |
++--------+----------+----------+------------+------------+--------+------------+--------+
+|  64989 | ADELINE  | SALESMAN |      66928 | 1991-02-20 |   1700 |        400 |   3001 |
+|  65271 | WADE     | SALESMAN |      66928 | 1991-02-22 |   1350 |        600 |   3001 |
++--------+----------+----------+------------+------------+--------+------------+--------+
+2 rows in set (0.00 sec)
+
+
+51.
+mysql> SELECT *
+    -> FROM emp3
+    -> WHERE hire_date<'1991-01-01' OR hire_date>'1991-12-31';
++--------+----------+----------+------------+------------+--------+------------+--------+
+| emp_id | emp_name | job_name | manager_id | hire_date  | salary | commission | dep_id |
++--------+----------+----------+------------+------------+--------+------------+--------+
+|  67858 | SACRLET  | ANALYST  |      68319 | 1997-04-19 |   3100 |       NULL |   2001 |
+|  67858 | SACRLET  | ANALYST  |      65646 | 1997-04-19 |   3100 |       NULL |   2001 |
+|  63679 | SANDRINE | CLERK    |      69062 | 1990-12-18 |    900 |       NULL |   2001 |
++--------+----------+----------+------------+------------+--------+------------+--------+
+3 rows in set (0.00 sec)
+
+
+52.
+mysql> SELECT *
+    -> FROM emp3;
++--------+----------+-----------+------------+------------+--------+------------+--------+
+| emp_id | emp_name | job_name  | manager_id | hire_date  | salary | commission | dep_id |
++--------+----------+-----------+------------+------------+--------+------------+--------+
+|  68319 | KAYLING  | PRESIDENT |       NULL | 1991-11-18 |   6000 |       NULL |   1001 |
+|  66928 | BLAZE    | MANAGER   |      68319 | 1991-05-01 |   2750 |       NULL |   3001 |
+|  67832 | CLARE    | MANAGER   |      68319 | 1991-06-09 |   2550 |       NULL |   1001 |
+|  65646 | JONAS    | MANAGER   |      68319 | 1991-04-02 |   2957 |       NULL |   2001 |
+|  67858 | SACRLET  | ANALYST   |      68319 | 1997-04-19 |   3100 |       NULL |   2001 |
+|  67858 | SACRLET  | ANALYST   |      65646 | 1997-04-19 |   3100 |       NULL |   2001 |
+|  69062 | FRANK    | ANALYST   |      65646 | 1991-12-03 |   3100 |       NULL |   2001 |
+|  63679 | SANDRINE | CLERK     |      69062 | 1990-12-18 |    900 |       NULL |   2001 |
+|  64989 | ADELINE  | SALESMAN  |      66928 | 1991-02-20 |   1700 |        400 |   3001 |
+|  65271 | WADE     | SALESMAN  |      66928 | 1991-02-22 |   1350 |        600 |   3001 |
+|  66564 | MADDEN   | SALESMAN  |      66928 | 1991-09-28 |   1350 |       1500 |   3001 |
++--------+----------+-----------+------------+------------+--------+------------+--------+
+11 rows in set (0.00 sec)
+
+mysql>
